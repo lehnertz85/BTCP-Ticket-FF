@@ -21,7 +21,8 @@
     "storage",
     "https://api.coinmarketcap.com/v1/ticker/bitcoin-private/",
     "https://api.coinmarketcap.com/v1/ticker/bitcoin-private/?convert=EUR",
-    "https://api.coinmarketcap.com/v1/ticker/bitcoin-private/?convert=CAD"],
+    "https://api.coinmarketcap.com/v1/ticker/bitcoin-private/?convert=CAD",
+    "https://nanex.co/api/public/ticker/btcpnano"],
   "version": "1.0.1",
   "short_name": "BTCP Ticker"
 }

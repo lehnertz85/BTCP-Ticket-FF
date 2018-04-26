@@ -9,7 +9,7 @@ function updatebadge() {
     // default to usd
     currency = "usd";
   }
-
+/******************************************************************************************************/
   if (exchange === "cmc") {
 
 
@@ -46,7 +46,21 @@ function updatebadge() {
     } else {}
 
   }
+/******************************************************************************************************/
+  if (exchange === "nano") {
+    if (currency === "nano") {
+      $.getJSON("https://nanex.co/api/public/ticker/btcpnano", function(data) {
+        var badge = "n/a";
 
+        var price = data.last_trade;
+        console.log(price);
+        if (price) {
+          localStorage['btcp_nano'] = price;
+        }
+      });
+    } else {badge = "n/a"}
+  }
+/******************************************************************************************************/
   if (currency == "eur") {
     if (localStorage['btcp_eur']) {
       badge = localStorage['btcp_eur'];
@@ -60,6 +74,11 @@ function updatebadge() {
   } else if (currency == "cad") {
     if (localStorage['btcp_cad']) {
       badge = localStorage['btcp_cad'];
+      badge = roundForBadge(badge);
+    }
+  }else if (currency == "nano") {
+    if (localStorage['btcp_nano']) {
+      badge = localStorage['btcp_nano'];
       badge = roundForBadge(badge);
     }
   }
