@@ -24,6 +24,6 @@
     "https://api.coinmarketcap.com/v1/ticker/bitcoin-private/?convert=CAD",
     "https://nanex.co/api/public/ticker/btcpnano",
     "https://tradesatoshi.com/api/public/getticker?market=BTCP_LTC"],
-  "version": "1.0.2",
+  "version": "1.0.3",
   "short_name": "BTCP Ticker"
 }
