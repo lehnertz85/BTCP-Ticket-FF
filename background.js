@@ -10,9 +10,8 @@ function updatebadge() {
     currency = "usd";
   }
 /******************************************************************************************************/
+
   if (exchange === "cmc") {
-
-
     if (currency === "usd") {
       $.getJSON("https://api.coinmarketcap.com/v1/ticker/bitcoin-private/", function(data) {
         var badge = "n/a";
@@ -43,24 +42,52 @@ function updatebadge() {
           localStorage['btcp_cad'] = price_cad;
         }
       });
-    } else {}
-
+    } else {badge = "n/a"}
   }
+
 /******************************************************************************************************/
+
   if (exchange === "nano") {
     if (currency === "nano") {
       $.getJSON("https://nanex.co/api/public/ticker/btcpnano", function(data) {
         var badge = "n/a";
 
-        var price = data.last_trade;
-        console.log(price);
-        if (price) {
-          localStorage['btcp_nano'] = price;
+        var price_nano = data.last_trade;
+        console.log(price_nano);
+        if (price_nano) {
+          localStorage['btcp_nano'] = price_nano;
         }
       });
     } else {badge = "n/a"}
   }
 /******************************************************************************************************/
+
+  if (exchange === "ts") {
+    if (currency === "ltc") {
+      $.getJSON("https://tradesatoshi.com/api/public/getticker?market=BTCP_LTC", function(data) {
+        var badge = "n/a";
+
+        var price_ltc = data.result.last;
+        console.log(price_ltc);
+        if (price_ltc) {
+          localStorage['btcp_ltc_ts'] = price_ltc;
+        }
+      });
+    }else if (currency === "bch") {
+      $.getJSON("https://tradesatoshi.com/api/public/getticker?market=BTCP_BCH", function(data) {
+        var badge = "n/a";
+
+        var price_bch = data.result.last;
+        console.log(price_bch);
+        if (price_bch) {
+          localStorage['btcp_bch_ts'] = price_bch;
+        }
+      });
+    } else {badge = "n/a"}
+  }
+
+/******************************************************************************************************/
+
   if (currency == "eur") {
     if (localStorage['btcp_eur']) {
       badge = localStorage['btcp_eur'];
@@ -79,6 +106,16 @@ function updatebadge() {
   }else if (currency == "nano") {
     if (localStorage['btcp_nano']) {
       badge = localStorage['btcp_nano'];
+      badge = roundForBadge(badge);
+    }
+  }else if (currency == "ltc") {
+    if (localStorage['btcp_ltc_ts']) {
+      badge = localStorage['btcp_ltc_ts'];
+      badge = roundForBadge(badge);
+    }
+  }else if (currency == "bch") {
+    if (localStorage['btcp_bch_ts']) {
+      badge = localStorage['btcp_bch_ts'];
       badge = roundForBadge(badge);
     }
   }

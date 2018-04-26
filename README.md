@@ -6,6 +6,8 @@ Coin Market Cap
 
 Nanex
 
+TradeSatoshi
+
 ## Currencies
 USD
 
@@ -14,6 +16,10 @@ EUR
 CAD
 
 Nano
+
+LTC (tradesatoshi)
+
+BCH (tradesatoshi)
 
 ## Other
 
