@@ -1,14 +1,18 @@
 # BTCP-Ticker-Firefox
-Bitcoin Private Ticket extension for Firefox.
+Bitcoin Private Ticker extension for Firefox.
 
 ## Information Sources
 Coin Market Cap
+
 Nanex
 
 ## Currencies
 USD
+
 EUR
+
 CAD
+
 Nano
 
 ## Other
