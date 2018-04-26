@@ -1,0 +1,32 @@
+<html>
+	<head>
+		<title>BTCP Ticker Options</title>
+	</head>
+	<body>
+		<h1 style="color:darkblue;">
+			BTCP Price Ticker
+		</h1>
+		<h3 >
+			If you like this Firefox extension and want to show it I gladly accept BTCP Tips.<br /><br />
+			BTCP TIP Address:&nbsp; &nbsp; b15yk5bn8GU3WsvnamcyvfJ7F3CqLkDVCvM
+		</h3>
+		<div>
+			Join the BTCP Community on Discord by clicking <a href="https://discord.gg/PBxkYqd" target="_blank">here</a><br />
+		</div>
+		<h2 style="color:darkblue;">Settings</h2>
+		<p>
+			Price Source: <select id="exchange"><option value="cmc">CoinMarketCap.com</option></select>
+		</p>
+		<p>
+			Currency: <select id="currency"><option value="cad">CAD</option><option value="eur">EUR</option><option value="usd">USD</option></select><br />
+			<br />
+			Precision: (select lower number if display cuts off) <select id="precision"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select><br />
+			<br />
+			Units: <select id="unit"><option value="1">BTCP</option><option value="0.001">mBTCP (0.001 BTCP)</option><option value="0.000001">uBTCP (0.000001 BTCP)</option><option value="0.00000001">sat (0.00000001 BTCP)</option></select></p>
+		<div id="status">
+			&nbsp;</div>
+		<p>
+			<button id="save">Save</button></p>
+	</body>
+	<script src="options.js"></script><script src="config.js"></script><script src="background.js"></script>
+</html>
