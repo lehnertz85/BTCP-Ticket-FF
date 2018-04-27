@@ -1,29 +1,31 @@
 {
-  "background": {
-    "page": "background.html"
-  },
-  "browser_action": {
-    "default_icon": "btcp_icon_48.png"
-  },
-  "description": "This extension displays the current btcp price on the badge icon.",
+  "manifest_version":2,
+  "name":"BTCP Ticker",
+  "description":"BTCP Price Monitor and other utilities around BTCP",
   "icons": {
-    "16": "btcp_icon_16.png",
-    "48": "btcp_icon_48.png",
-    "128": "btcp_icon_128.png"
+    "16": "images/btcp_icon_16.png",
+    "48": "images/btcp_icon_48.png",
+    "128": "images/btcp_icon_128.png"
   },
-  "manifest_version": 2,
-  "name": "BTCP Ticker",
+  "version":"2.0",
+  "background":{
+    "page":"background.html"
+  },
+  "browser_action":{
+    "default_icon":"icon.png",
+    "default_popup":"popup.html"
+  },
+  "author":"Will Lehnertz",
+  "web_accessible_resources":[
+    "icon.png"
+  ],
   "options_ui": {
     "page": "options.html"
   },
-  "homepage_url": "https://github.com/lehnertz85/btcp-ticker-firefox",
-  "permissions": [
+  "permissions":[
+    "notifications",
     "storage",
-    "https://api.coinmarketcap.com/v1/ticker/bitcoin-private/",
-    "https://api.coinmarketcap.com/v1/ticker/bitcoin-private/?convert=EUR",
-    "https://api.coinmarketcap.com/v1/ticker/bitcoin-private/?convert=CAD",
-    "https://nanex.co/api/public/ticker/btcpnano",
-    "https://tradesatoshi.com/api/public/getticker?market=BTCP_LTC"],
-  "version": "1.0.3",
-  "short_name": "BTCP Ticker"
+    "https://api.coinmarketcap.com/",
+    "http://www.ecb.europa.eu/"
+  ]
 }

@@ -1,89 +1,90 @@
-// Saves options to localStorage.
-function save_options() {
-  var selectedExchange = document.getElementById("exchange");
-  var selectedCurrency = document.getElementById("currency");
-  var selectedPrecision = document.getElementById("precision");
-  var selectedUnit = document.getElementById("unit");
-  var exchange = selectedExchange.children[selectedExchange.selectedIndex].value;
-  var currency = selectedCurrency.children[selectedCurrency.selectedIndex].value;
-  var precision = selectedPrecision.children[selectedPrecision.selectedIndex].value;
-  var unit = selectedUnit.children[selectedUnit.selectedIndex].value;
+window.addEventListener("load", onLoad());
 
-  var optionsOK = true;
+function onLoad() {
+    document.addEventListener('DOMContentLoaded', function() {
+        loadOptions();
+        document
+            .getElementById("save")
+            .addEventListener("click", saveOptions);
+    });
+}
+function loadOptions() {
+    var precision = options.precision.get();
+    var e = document.getElementById("precision");
+    e.options.selectedIndex=precision;
 
-  if (optionsOK) {
-    localStorage["exchange"] = exchange;
-    localStorage["currency"] = currency;
-    localStorage["precision"] = precision;
-    localStorage["unit"] = unit;
-  }
+    var divider = options.divider.get();
+    var e = document.getElementById("divider");
+    for(var i = 0; i<e.length; i++){
+        if(e[i].value==divider){
+            e.options.selectedIndex=i;
+        }
+    }
 
-  // Update status to let user know options were saved.
-  var status = document.getElementById("status");
-  if (optionsOK) {
-    status.innerHTML = "Options Saved.";
-  } else {
-    status.innerHTML = "Options Not Saved";
-  }
-  setTimeout(function() {
-    status.innerHTML = "";
-  }, 1500);
+    var refresh = options.refresh.get();
+    var e = document.getElementById("refresh");
+    for(var i = 0; i<e.length; i++){
+        if(e[i].value==refresh){
+            e.options.selectedIndex=i;
+        }
+    }
 
-  updatebadge();
+    var currency = options.currency.get();
+    var e = document.getElementById("currency");
+    for(var i = 0; i<e.length; i++){
+        if(e[i].value==currency){
+            e.options.selectedIndex=i;
+        }
+    }
+
+    var notificationMax = options.notificationMax.get();
+    var e = document.getElementById("notificationMax");
+    if(notificationMax===true){
+        e.checked=true;
+    }
+
+    var notificationMin = options.notificationMin.get();
+    var e = document.getElementById("notificationMin");
+    if(notificationMin===true){
+        e.checked=true;
+    }
+
+    var lastMax = options.lastMax.get();
+    var e = document.getElementById("lastMax");
+    e.value = lastMax;
+
+    var lastMin = options.lastMin.get();
+    var e = document.getElementById("lastMin");
+    e.value = lastMin;
+
+    var monitorWealth = options.monitorWealth.get();
+    var e = document.getElementById("monitorWealth");
+    if(monitorWealth===true){
+        e.checked=true;
+    }
+
+    var wealth = options.wealth.get();
+    var e = document.getElementById("wealth");
+    e.value = wealth;
 }
 
-// Restores select box state to saved value from localStorage.
-function restore_options() {
-  var exchange = localStorage["exchange"];
-  var currency = localStorage["currency"];
-  var precision = localStorage["precision"];
-  var unit = localStorage["unit"];
-  if (!exchange) {
-    // default to cmc
-    exchange = "cmc";
-  }
-  if (!currency) {
-    // default to usd
-    currency = "usd";
-  }
-  if (!precision) {
-    // default to 2
-    precision = 2;
-  }
+function saveOptions() {
+    options.precision.set();
+    options.currency.set();
+    options.divider.set();
+    options.refresh.set();
+    options.lastMax.set();
+    options.lastMin.set();
+    options.notificationMax.set();
+    options.notificationMin.set();
+    options.monitorWealth.set();
+    options.wealth.set();
+    refreshBadgeAndTitle();
+    clearInterval();
+    launchInterval();
+    loadOptions();
+    setTimeout(function () {
+        loadOptions();
 
-  var selectedExchange = document.getElementById("exchange");
-  for (var i = 0; i < selectedExchange.children.length; i++) {
-    var child = selectedExchange.children[i];
-    if (child.value == exchange) {
-      child.selected = "true";
-      break;
-    }
-  }
-  var selectedCurrency = document.getElementById("currency");
-  for (var i = 0; i < selectedCurrency.children.length; i++) {
-    var child = selectedCurrency.children[i];
-    if (child.value == currency) {
-      child.selected = "true";
-      break;
-    }
-  }
-  var selectedPrecision = document.getElementById("precision");
-  for (var i = 0; i < selectedPrecision.children.length; i++) {
-    var child = selectedPrecision.children[i];
-    if (child.value == precision) {
-      child.selected = "true";
-      break;
-    }
-  }
-  var selectedUnit = document.getElementById("unit");
-  for (var i = 0; i < selectedUnit.children.length; i++) {
-    var child = selectedUnit.children[i];
-    if (child.value == unit) {
-      child.selected = "true";
-      break;
-    }
-  }
+    },2000)
 }
-
-document.addEventListener('DOMContentLoaded', restore_options);
-document.querySelector('#save').addEventListener('click', save_options);

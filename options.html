@@ -1,54 +1,160 @@
+<!DOCTYPE html>
 <html>
-	<head>
-		<title>BTCP Ticker Options</title>
-	</head>
-	<body>
-		<h1 style="color:darkblue;">
-			BTCP Price Ticker
-		</h1>
-		<h3 >
-			If you like this Firefox extension and want to show it I gladly accept BTCP Tips.<br /><br />
-			BTCP TIP Address:&nbsp; &nbsp; b15yk5bn8GU3WsvnamcyvfJ7F3CqLkDVCvM
-		</h3>
-		<div>
-			Join the BTCP Community on Discord by clicking <a href="https://discord.gg/PBxkYqd" target="_blank">here</a><br />
-		</div>
-		<h2 style="color:darkblue;">Settings</h2>
-		<p>
-			Price Source: <select id="exchange">
-				<option value="cmc">CoinMarketCap.com</option>
-				<option value="nano">Nanex.co</option>
-				<option value="ts">Tradeshatoshi.com</option>
-			</select>
-		</p>
-		<p>
-			Currency: <select id="currency">
-				<option value="cad">CAD</option>
-				<option value="eur">EUR</option><option value="usd">USD</option>
-				<option value="nano">Nano</option>
-				<option value="ltc">LTC</option>
-				<option value="bch">BCH</option>
-			</select><br />
-			<br />
-			Precision: (select lower number if display cuts off) <select id="precision">
-				<option value="0">0</option>
-				<option value="1">1</option>
-				<option value="2">2</option>
-				<option value="3">3</option>
-				<option value="4">4</option>
-			</select><br />
-			<br />
-			Units: <select id="unit">
-				<option value="1">BTCP</option>
-				<option value="0.001">mBTCP (0.001 BTCP)</option>
-				<option value="0.000001">uBTCP (0.000001 BTCP)</option>
-				<option value="0.00000001">sat (0.00000001 BTCP)</option>
-			</select>
-		</p>
-		<div id="status">
-			&nbsp;</div>
-		<p>
-			<button id="save">Save</button></p>
-	</body>
-	<script src="options.js"></script><script src="config.js"></script><script src="background.js"></script>
+<head>
+    <title>BTCP Ticker</title>
+    <script type="text/javascript" src="btcp-price.js"></script>
+    <script type="text/javascript" src="options.js"></script>
+    <style type="text/css">
+        table td {
+            padding: 5px;
+        }
+        td.opt {
+            vertical-align: top;
+            text-align: left;
+        }
+        td.mainTitle {
+            color: #252b5e;
+            text-align: center;
+        }
+        td.title {
+            color: #252b5e;
+        }
+    </style>
+</head>
+<body>
+<h1 style="color:#252b5e;">
+    BTCP Price Ticker
+</h1>
+<h3 >
+    If you like this Firefox extension and want to show it I gladly accept BTCP Tips.<br /><br />
+    BTCP TIP Address:&nbsp; &nbsp; b15yk5bn8GU3WsvnamcyvfJ7F3CqLkDVCvM
+</h3>
+<div>
+    Join the BTCP Community on Discord by clicking <a href="https://discord.gg/PBxkYqd" target="_blank">here</a>.<br />
+
+    Suggestions can be made through <a href="https://github.com/lehnertz85/btcp-ticker-firefox" target="_blank">Github</a>.<br />
+
+</div>
+<div><hr></div>
+<table border=0 cellpadding="3px">
+    <tr>
+        <td colspan="2" class="mainTitle"><strong><h2>Settings</h2></strong></td>
+    </tr>
+    <tr>
+        <td class="opt">Refresh rates :</td>
+        <td>
+            <select id="refresh" style="width: 100px;">
+                <option value="10">10s</option>
+                <option value="30">30s</option>
+                <option value="60">60s</option>
+                <option value="120">2min</option>
+                <option value="300">5min</option>
+                <option value="600">10min</option>
+                <option value="900">15min</option>
+                <option value="1800">30min</option>
+                <option value="3600">60min</option>
+                <option value="7200">2h</option>
+                s
+                <option value="14400">4h</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td class="opt">Price precision:</td>
+        <td>
+            <select id="precision" style="width: 100px;">
+                <option value="0">0</option>
+                <option value="1">0.0</option>
+                <option value="2">0.00</option>
+                <option value="3">0.000</option>
+                <option value="4">0.0000</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td class="opt">Multiplier/Divider</td>
+        <td>
+            <select id="divider" style="width: 100px;">
+                <option value="0.0001">*10000</option>
+                <option value="0.001">*1000</option>
+                <option value="0.01">*100</option>
+                <option value="0.1">*10</option>
+                <option value="1">None (*1)</option>
+                <option value="10">/10</option>
+                <option value="100">/100</option>
+                <option value="1000">/1000</option>
+                <option value="10000">/10000</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td class="opt">Displayed Currency:</td>
+        <td>
+            <select id="currency" style="width: 100px;">
+                <option value="BTC">BTC</option>
+                <option value="NANO">Nano</option>
+                <option value="USD">USD</option>
+                <option value="EUR">EUR</option>
+                <option value="AUD">AUD</option>
+                <option value="BGN">BGN</option>
+                <option value="BRL">BRL</option>
+                <option value="CAD">CAD</option>
+                <option value="CHF">CHR</option>
+                <option value="CNY">CNY</option>
+                <option value="CZK">CZK</option>
+                <option value="DKK">DKK</option>
+                <option value="GBP">GBP</option>
+                <option value="HKD">HKD</option>
+                <option value="HRK">HRK</option>
+                <option value="HUF">HUF</option>
+                <option value="IDR">IDR</option>
+                <option value="ILS">ILS</option>
+                <option value="INR">INR</option>
+                <option value="JPY">JPY</option>
+                <option value="KRW">KRW</option>
+                <option value="MXN">MXN</option>
+                <option value="MYR">MYR</option>
+                <option value="NOK">NOK</option>
+                <option value="NZD">NZD</option>
+                <option value="PHP">PHP</option>
+                <option value="PLN">PLN</option>
+                <option value="RON">RON</option>
+                <option value="RUB">RUB</option>
+                <option value="SEK">SEK</option>
+                <option value="SGD">SGD</option>
+                <option value="THB">THB</option>
+                <option value="ZAR">ZAR</option>
+            </select>
+        </td>
+    </tr>
+    <tr><td colspan="2"><hr></td></tr>
+    <tr>
+        <td colspan="2" class="title"><strong>Notify when:</strong></td>
+    </tr>
+    <tr>
+        <td >
+            <input type="checkbox" id="notificationMax"> value rises over
+        </td>
+        <td><input id="lastMax" size=12></td>
+    </tr>
+    <td>
+        <input type="checkbox" id="notificationMin"> value falls below
+    </td>
+    <td><input id="lastMin" size=12></td>
+    </tr>
+    <tr><td colspan="2"><hr></td></tr>
+    <tr>
+        <td colspan="2" class="title"><strong>Keep track of your bag:</strong></td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <input type="checkbox" id="monitorWealth"> Total BTCP coins: <input id="wealth" size=12>
+        </td>
+    </tr>
+    <tr><td colspan="2"><hr></td></tr>
+    <tr>
+        <td colspan="2" style="text-align: center"><button id="save">Save</button></td>
+    </tr>
+</table>
+</body>
 </html>
