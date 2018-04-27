@@ -14,13 +14,11 @@ Coin Market Cap
 Nanex
 
 ## Currencies
-USD
-
-EUR
-
-CAD
-
-Nano
+* USD
+* EUR
+* CAD
+* Nano
+* And many more
 
 
 ## Other
