@@ -4,7 +4,7 @@ Bitcoin Private Ticker extension for Firefox.
 ## Features
 
 * Notifications
-* Monitor your bags value
+* Monitor your bag's value
 * Quicklinks to all BTCP resources
 
 ## Information Sources

@@ -14,6 +14,10 @@ function rotateRefreshIcon() {
         refreshIcon.style.transform="rotate("+rotateValue+"deg)";
     },10)
 }
+function graph() {
+    var graphthingy = document.getElementById("graph")
+    var graphdiv = document.getElementById("widget")
+}
 var optionsSelected = false;
 function toggleOptions(){
     var quicklinks = document.getElementById("quicklinks");
@@ -39,7 +43,7 @@ function toggleOptions(){
 function loadPopup() {
     window.onload = function(){
         var editorExtensionId = "ogmiolejjgikhpbhnbnkdlhopfknldcb";
-        browser.runtime.sendMessage({type: "priceHistory"},
+        chrome.runtime.sendMessage({type: "priceHistory"},
             function (response) {
                 console.log(response);
             });

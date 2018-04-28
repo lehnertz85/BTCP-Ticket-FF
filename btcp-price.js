@@ -4,7 +4,7 @@ var ecbInt;
 function setTitle() {
     var curr = options.currency.get();
     var price = BtcpPrice.getPrice(curr);
-    browser.browserAction.setTitle({
+    chrome.browserAction.setTitle({
         'title': '1 BTCP = ' + price + " " + curr
     });
 };
@@ -24,7 +24,7 @@ function setBadgeColor(color) {
             HexaColor = "#000000";
             break;
     }
-    browser.browserAction.setBadgeBackgroundColor({
+    chrome.browserAction.setBadgeBackgroundColor({
         color: HexaColor
     });
 }
@@ -40,14 +40,14 @@ function setBadge(multiplicator) {
     if(multiplicator!==undefined){
         text = (text*multiplicator).toFixed(p);
     }
-    browser.browserAction.setBadgeText({
+    chrome.browserAction.setBadgeText({
         'text': text
     });
 }
 function prepareBadge() {
 
     setBadgeColor('blue')
-    browser.browserAction.setBadgeText({
+    chrome.browserAction.setBadgeText({
         'text': '...'
     });
 }
@@ -673,7 +673,7 @@ notify = function (title, msg) {
         month = '0' + month;
     }
     var date_str = hour + ':' + minute + ' ' + day + '.' + month + '.' + year;
-    return browser.notifications.create('', {
+    return chrome.notifications.create('', {
         type: "basic",
         title: title,
         message: msg,
