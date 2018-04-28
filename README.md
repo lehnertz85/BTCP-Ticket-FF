@@ -37,3 +37,6 @@ BTCP: b15yk5bn8GU3WsvnamcyvfJ7F3CqLkDVCvM
 4. Monitor your bag's value!
 5. Quicklinks to all BTCP resources!
 
+* Changed `broswer` calls to `chrome` calls in preperations to expand to other platforms.
+* Preperations are made for 2.0.1 with Coin Makrket Cap graphs.
+
