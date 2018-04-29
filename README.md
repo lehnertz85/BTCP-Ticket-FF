@@ -12,7 +12,7 @@ Bitcoin Private Ticker extension for Firefox.
 
 ## Information Sources
 
-Coin Market Cap
+CoinMarketCap
 
 Nanex
 
@@ -33,7 +33,7 @@ https://addons.mozilla.org/en-US/firefox/addon/btcp-ticker/
 
 BTCP Donation pool:
 
-BTCP: b1RXUJgnuxtzHyJ5UTWerh4pNBWcVikESZe
+`BTCP: b1RXUJgnuxtzHyJ5UTWerh4pNBWcVikESZe`
 
 ## Changes:
 
