@@ -1,7 +1,6 @@
 window.addEventListener("load", loadPopup());
 
 function rotateRefreshIcon() {
-    // transform: rotate(12deg);
     var refreshIcon = document.getElementById("refresh-icon");
     var rotateValue = 0;
     var refreshInt = setInterval(function(){
@@ -14,12 +13,30 @@ function rotateRefreshIcon() {
         refreshIcon.style.transform="rotate("+rotateValue+"deg)";
     },10)
 }
-function graph() {
-    var graphthingy = document.getElementById("graph")
-    var graphdiv = document.getElementById("widget")
+var linkSelected = false;
+function links() {
+    var widget = document.getElementById("widget");
+    var quicklinks = document.getElementById("quicklinks");
+    var optionsTable = document.getElementById("options-table");
+    var theBody = document.getElementById("theBody")
+    if(!linkSelected){
+        quicklinks.style.display="block";
+        optionsTable.style.display="none";
+        widget.style.display="none";
+        theBody.style.height="400px";
+        theBody.style.width="242px";
+    }else{
+        quicklinks.style.display="none";
+        optionsTable.style.display="none";
+        widget.style.display="block";
+        theBody.style.height="242px";
+        theBody.style.width="500px";
+    }
+    linkSelected=!linkSelected;
 }
 var optionsSelected = false;
 function toggleOptions(){
+    var widget = document.getElementById("widget");
     var quicklinks = document.getElementById("quicklinks");
     var optionsTable = document.getElementById("options-table");
     var optionsIcon = document.getElementById("options-icon");
@@ -27,15 +44,17 @@ function toggleOptions(){
     if(!optionsSelected){
         optionsIcon.style.backgroundImage="url(images/options_selected.png)";
         quicklinks.style.display="none";
+        widget.style.display="none";
         optionsTable.style.display="block";
         theBody.style.height="425px";
         theBody.style.width="270px";
     }else{
         optionsIcon.style.backgroundImage="url(images/options.png)";
-        quicklinks.style.display="block";
+        quicklinks.style.display="none";
+        widget.style.display="block";
         optionsTable.style.display="none";
-        theBody.style.height="330px";
-        theBody.style.width="220px";
+        theBody.style.height="242px";
+        theBody.style.width="500px";
     }
     loadOptions();
     optionsSelected=!optionsSelected;
@@ -66,5 +85,25 @@ function loadPopup() {
             var redirectWindow = window.open('https://github.com/BTCPrivate', '_blank');
             redirectWindow.location;
         };
+        var linkIcon = document.getElementById("link-icon");
+        linkIcon.onclick=function(e){
+            links();
+        };
+        
+        // Copy address to clipboard
+        var span = document.getElementById("address");
+
+        span.onclick = function() {
+          document.execCommand("copy");
+        }
+
+        span.addEventListener("copy", function(event) {
+          event.preventDefault();
+          if (event.clipboardData) {
+            event.clipboardData.setData("text/plain", span.textContent);
+            console.log(event.clipboardData.getData("text"))
+          }
+        });
     }
 }
+
