@@ -2,6 +2,8 @@
 
 Bitcoin Private Ticker extension for Firefox.
 
+See the wiki for help with settings: [link](https://github.com/lehnertz85/btcp-ticker-firefox/wiki).
+
 ## Features
 
 * Ticker for the price of BTCP
