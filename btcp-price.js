@@ -181,15 +181,15 @@ var BtcpPrice = {
     fetch: {
         btcpPrice: function () {
             return AJAX
-                .get("https://api.coinmarketcap.com/v1/ticker/bitcoin-private/")
+                .get("https://api.coinmarketcap.com/v2/ticker/2575/?convert=BTC")
                 .then(function (data) {
                     if (data) {
                         data = JSON.parse(data);
                         if (Array.isArray(data))
                             data = data[0];
 
-                        var BtcpInUSD = data.price_usd;
-                        var BtcpInBTC = data.price_btc;
+                        var BtcpInUSD = data.data.quotes.USD.price;
+                        var BtcpInBTC = data.data.quotes.BTC.price;
                         BtcpPrice.currentBTCPRate['BTC'] = parseFloat(BtcpInBTC);
                         var currencyExchange = JSON.parse(store.get('currencyExchangesRates'));
 
@@ -219,27 +219,27 @@ var BtcpPrice = {
                     console.error(err);
                 })
         },
-        bitcoinPrice: function () {
-            return AJAX
-                .get("https://api.coinmarketcap.com/v1/ticker/bitcoin/")
-                .then(function (data) {
-                    if (data) {
-                        data = JSON.parse(data);
-                        if (Array.isArray(data))
-                            data = data[0];
+        // bitcoinPrice: function () {
+        //     return AJAX
+        //         .get("https://api.coinmarketcap.com/v1/ticker/bitcoin/")
+        //         .then(function (data) {
+        //             if (data) {
+        //                 data = JSON.parse(data);
+        //                 if (Array.isArray(data))
+        //                     data = data[0];
 
-                        var btcInUSD = data.price_usd;
-                        for (var cur in BtcpPrice.currencyExchangesRates) {
-                            BtcpPrice.currentBitcoinRate[cur] = parseFloat(BtcpPrice.currencyExchangesRates[cur]) * (btcInUSD);
-                        }
-                        store.set('currentBitcoinRate', JSON.stringify(BtcpPrice.currentBitcoinRate));
+        //                 var btcInUSD = data.price_usd;
+        //                 for (var cur in BtcpPrice.currencyExchangesRates) {
+        //                     BtcpPrice.currentBitcoinRate[cur] = parseFloat(BtcpPrice.currencyExchangesRates[cur]) * (btcInUSD);
+        //                 }
+        //                 store.set('currentBitcoinRate', JSON.stringify(BtcpPrice.currentBitcoinRate));
 
-                    }
-                })
-                .catch(function (err) {
-                    console.error(err);
-                })
-        },
+        //             }
+        //         })
+        //         .catch(function (err) {
+        //             console.error(err);
+        //         })
+        // },
         currencyList: function () {
             return AJAX
                 .get('http://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml')
